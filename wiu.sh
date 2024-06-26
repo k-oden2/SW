@@ -31,13 +31,21 @@ sudo apt-get install -y winetricks
 sudo apt install -y zenity
 wineserver -k
 winetricks --self-update
-winetricks --unattended vd=600x650 alldlls=builtin
+winetricks --unattended gdiplus vd=600x650 alldlls=builtin
 #
 wine reg add "HKCU\\Software\\Wine\\Direct3D" /v UseGLSL /t REG_SZ /d disabled /f
 wine reg add "HKCU\\Software\\Wine\\Direct3D" /v StrictDrawOrdering /t REG_SZ /d enabled /f
 wine reg add "HKCU\\Software\\Wine\\Direct3D" /v DirectDrawRenderer /t REG_SZ /d gdi /f
 wine reg add "HKCU\\Software\\Wine\\Direct3D" /v VideoMemorySize /t REG_SZ /d 2048 /f
 wineserver -k
+#
+export WINEPREFIX=~/.wine
+#
+winetricks --force dxvk
+wineserver -k
+
+echo "DONE"
+
 # ADD LC JP
 sudo apt-get install language-pack-ja -y
 sudo apt update
@@ -47,10 +55,22 @@ wineboot
 echo -e "[Desktop Entry]\nName=Explorer\nExec=env wine explorer.exe\nType=Application\nStartupNotify=true\nPath=/home/user/.wine/drive_c:/windows\nStartupWMClass=explorer.exe\nIcon=1CD8_rundll32.0\nComment=\nTerminal=false" > ~/Desktop/Explorer.desktop
 # EXPLORER JP
 echo -e "[Desktop Entry]\nName=Explorer JP\nExec=env LANG=\"ja_JP.UTF8\" wine explorer.exe\nType=Application\nStartupNotify=true\nPath=/home/user/.wine/drive_c:/windows\nStartupWMClass=explorer.exe\nIcon=1CD8_rundll32.0\nComment=\nTerminal=false" > ~/Desktop/Explorer_JP.desktop
+# Explorer DXVK
+echo -e "[Desktop Entry]\n\
+Name=Explorer JP\n\
+Exec=env LANG=\"ja_JP.UTF8\" WINEPREFIX=\"/home/user/.wine\" DXVK_HUD=1 wine explorer.exe\n\
+Type=Application\n\
+StartupNotify=true\n\
+Path=/home/user/.wine/drive_c/windows\n\
+StartupWMClass=explorer.exe\n\
+Icon=1CD8_rundll32.0\n\
+Comment=\n\
+Terminal=false" > ~/Desktop/Exp_DXVK.desktop
 
 # PERMISSION 
 chmod +x ~/Desktop/Explorer.desktop
 chmod +x ~/Desktop/Explorer_JP.desktop
+chmod +x ~/Desktop/Exp_DXVK.desktop
 # CLEAN
 sudo apt-get clean
 sudo apt-get autoclean -y
@@ -60,3 +80,10 @@ sudo apt update
 # DONE
 clear
 echo -e "\e[31mDone\e[0m"
+
+#DL 
+wget https://files2.codecguide.com/K-Lite_Codec_Pack_1840_Standard.exe -O K-lite.exe
+
+wget https://aka.ms/vs/17/release/vc_redist.x86.exe -O vcr32.exe
+
+wget https://aka.ms/vs/17/release/vc_redist.x64.exe -O vcr64.exe
