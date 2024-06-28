@@ -35,18 +35,23 @@ winetricks --unattended alldlls=builtin
 #
 wine reg add "HKCU\\Software\\Wine\\Direct3D" /v UseGLSL /t REG_SZ /d disabled /f
 wine reg add "HKCU\\Software\\Wine\\Direct3D" /v StrictDrawOrdering /t REG_SZ /d enabled /f
-wine reg add "HKCU\\Software\\Wine\\Direct3D" /v DirectDrawRenderer /t REG_SZ /d gdi /f
+wine reg add "HKCU\\Software\\Wine\\Direct3D" /v DirectDrawRenderer /t REG_SZ /d opengl /f
 wine reg add "HKCU\\Software\\Wine\\Direct3D" /v VideoMemorySize /t REG_SZ /d 4096 /f
 wineserver -k
 #
 export WINEPREFIX=~/.wine
 #
-winetricks --force dxvk
+winetricks --force dxvk -y
+
 #
+cd
 wget https://raw.githubusercontent.com/k-oden2/SW/main/Registry -O Registry.zip
 # EXTRACT FILE
-unzip Registry.zip 
+cd
+unzip Registry.zip
+cd
 mv Registry.zip
+
 wineserver -k
 
 echo "DONE"
