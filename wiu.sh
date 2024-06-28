@@ -45,11 +45,10 @@ winetricks --force dxvk -y
 
 #
 cd
-wget https://raw.githubusercontent.com/k-oden2/SW/main/Registry -O Registry.zip
+wget https://raw.githubusercontent.com/k-oden2/SW/main/Registry.zip -O Registry.zip
 # EXTRACT FILE
 cd
 unzip Registry.zip
-cd
 mv Registry.zip
 
 wineserver -k
