@@ -36,7 +36,7 @@ winetricks --unattended alldlls=builtin
 wine reg add "HKCU\\Software\\Wine\\Direct3D" /v UseGLSL /t REG_SZ /d disabled /f
 wine reg add "HKCU\\Software\\Wine\\Direct3D" /v StrictDrawOrdering /t REG_SZ /d enabled /f
 wine reg add "HKCU\\Software\\Wine\\Direct3D" /v DirectDrawRenderer /t REG_SZ /d gdi /f
-wine reg add "HKCU\\Software\\Wine\\Direct3D" /v VideoMemorySize /t REG_SZ /d 2048 /f
+wine reg add "HKCU\\Software\\Wine\\Direct3D" /v VideoMemorySize /t REG_SZ /d 4096 /f
 wineserver -k
 #
 export WINEPREFIX=~/.wine
@@ -56,13 +56,20 @@ sudo apt-get install language-pack-ja -y
 sudo apt update
 wineboot
 
-# EXPLORER
-echo -e "[Desktop Entry]\nName=Explorer\nExec=env wine explorer.exe\nType=Application\nStartupNotify=true\nPath=/home/user/.wine/drive_c:/windows\nStartupWMClass=explorer.exe\nIcon=1CD8_rundll32.0\nComment=\nTerminal=false" > ~/Desktop/Explorer.desktop
-# EXPLORER JP
-echo -e "[Desktop Entry]\nName=Explorer JP\nExec=env LANG=\"ja_JP.UTF8\" wine explorer.exe\nType=Application\nStartupNotify=true\nPath=/home/user/.wine/drive_c:/windows\nStartupWMClass=explorer.exe\nIcon=1CD8_rundll32.0\nComment=\nTerminal=false" > ~/Desktop/Explorer_JP.desktop
-# Explorer DXVK
+# EXPLORER EN
 echo -e "[Desktop Entry]\n\
-Name=Explorer JP\n\
+Name=wine\n\
+Exec=env LANG=\"en_US.UTF8\" WINEPREFIX=\"/home/user/.wine\" DXVK_HUD=1 wine explorer.exe\n\
+Type=Application\n\
+StartupNotify=true\n\
+Path=/home/user/.wine/drive_c/windows\n\
+StartupWMClass=explorer.exe\n\
+Icon=1CD8_rundll32.0\n\
+Comment=\n\
+Terminal=false" > ~/Desktop/wine_EN.desktop
+# Explorer JP
+echo -e "[Desktop Entry]\n\
+Name=wine DXVK\n\
 Exec=env LANG=\"ja_JP.UTF8\" WINEPREFIX=\"/home/user/.wine\" DXVK_HUD=1 wine explorer.exe\n\
 Type=Application\n\
 StartupNotify=true\n\
@@ -70,12 +77,11 @@ Path=/home/user/.wine/drive_c/windows\n\
 StartupWMClass=explorer.exe\n\
 Icon=1CD8_rundll32.0\n\
 Comment=\n\
-Terminal=false" > ~/Desktop/Exp_DXVK.desktop
+Terminal=false" > ~/Desktop/wine_JP.desktop
 
 # PERMISSION 
-chmod +x ~/Desktop/Explorer.desktop
-chmod +x ~/Desktop/Explorer_JP.desktop
-chmod +x ~/Desktop/Exp_DXVK.desktop
+chmod +x ~/Desktop/wine_EN.desktop
+chmod +x ~/Desktop/wine_JP.desktop
 # CLEAN
 sudo apt-get clean
 sudo apt-get autoclean -y
