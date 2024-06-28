@@ -32,17 +32,41 @@ sudo apt install -y zenity
 wineserver -k
 winetricks --self-update
 winetricks --unattended alldlls=builtin
-#
-wine reg add "HKCU\\Software\\Wine\\Direct3D" /v UseGLSL /t REG_SZ /d disabled /f
-wine reg add "HKCU\\Software\\Wine\\Direct3D" /v StrictDrawOrdering /t REG_SZ /d enabled /f
-wine reg add "HKCU\\Software\\Wine\\Direct3D" /v DirectDrawRenderer /t REG_SZ /d opengl /f
-wine reg add "HKCU\\Software\\Wine\\Direct3D" /v VideoMemorySize /t REG_SZ /d 4096 /f
 wineserver -k
 #
 export WINEPREFIX=~/.wine
 #
 winetricks --force dxvk -y
-
+wineserver -k
+#
+wine reg add "HKCU\Software\Wine\Direct3D" /v "AlwaysOffscreen" /t REG_SZ /d "enabled" /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "CheckFloatConstants" /t REG_SZ /d "disabled" /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "csmt" /t REG_DWORD /d 0x00000003 /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "DirectDrawRenderer" /t REG_SZ /d "gdi" /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "MaxVersionGL" /t REG_DWORD /d 0x00030002 /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "MultisampleTextures" /t REG_DWORD /d 0x00000001 /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "Multisampling" /t REG_SZ /d "disabled" /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "OffScreenRenderingMode" /t REG_SZ /d "fbo" /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "PixelShaderMode" /t REG_SZ /d "enabled" /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "renderer" /t REG_SZ /d "gl" /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "RenderTargetLockMode" /t REG_SZ /d "readdraw" /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "SampleCount" /t REG_DWORD /d 0x00000001 /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "shader_backend" /t REG_SZ /d "glsl" /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "strict_shader_math" /t REG_DWORD /d 0x00000001 /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "UseGLSL" /t REG_SZ /d "enabled" /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "VertexBufferMode" /t REG_SZ /d "hardware" /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "VertexShaderMode" /t REG_SZ /d "hardware" /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "VideoDescription" /t REG_SZ /d "NVIDIA GeForce GTX 470" /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "VideoDriver" /t REG_SZ /d "nv4_disp.dll" /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "VideoMemorySize" /t REG_SZ /d "204648" /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "VideoPciDeviceID" /t REG_DWORD /d 0x000067df /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "VideoPciVendorID" /t REG_DWORD /d 0x00001002 /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "VideoMemoryManagement" /t REG_SZ /d "enabled" /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "VideoCardRam" /t REG_SZ /d "2048" /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "UseVRAMSize" /t REG_SZ /d "true" /f
+wine reg add "HKCU\Software\Wine\Direct3D" /v "OffscreenRenderingMode" /t REG_SZ /d "fbo" /f
+#
+wineserver -k
 #
 cd
 wget https://raw.githubusercontent.com/k-oden2/SW/main/Registry.zip -O Registry.zip
