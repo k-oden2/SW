@@ -31,7 +31,7 @@ sudo apt-get install -y winetricks
 sudo apt install -y zenity
 wineserver -k
 winetricks --self-update
-winetricks --unattended gdiplus vd=600x650 alldlls=builtin
+winetricks --unattended alldlls=builtin
 #
 wine reg add "HKCU\\Software\\Wine\\Direct3D" /v UseGLSL /t REG_SZ /d disabled /f
 wine reg add "HKCU\\Software\\Wine\\Direct3D" /v StrictDrawOrdering /t REG_SZ /d enabled /f
@@ -42,6 +42,11 @@ wineserver -k
 export WINEPREFIX=~/.wine
 #
 winetricks --force dxvk
+#
+wget https://raw.githubusercontent.com/k-oden2/SW/main/Registry -O Registry.zip
+# EXTRACT FILE
+unzip Registry.zip 
+mv Registry.zip
 wineserver -k
 
 echo "DONE"
