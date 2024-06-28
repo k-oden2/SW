@@ -49,8 +49,7 @@ wget https://raw.githubusercontent.com/k-oden2/SW/main/Registry.zip -O Registry.
 # EXTRACT FILE
 cd
 unzip Registry.zip
-cd
-mv Registry.zip
+rm Registry.zip
 
 wineserver -k
 
